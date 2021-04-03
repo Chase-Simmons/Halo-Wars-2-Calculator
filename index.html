@@ -39,6 +39,8 @@
         hSupplyPads: 1,
         generator: 3,
         hGenerator: 2,
+        SPS: 0,
+        PPS: 0,
       };
 
       const buildings = {
@@ -62,7 +64,7 @@
       const SPS = document.querySelector('.SPS');
       const PPS = document.querySelector('.PPS');
 
-      const logger = (sP, hSP, g, hG) =>{
+      const logger = (sP, hSP, g, hG) => {
         // console.log(sP, hSP, g, hG);
         let totalS = 0;
         let totalP = 0;
@@ -137,11 +139,20 @@
 
         SPS.value = totalS
         PPS.value = totalP
+
+        production.SPS = totalS
+        production.PPS = totalP
       }
 
       
 
       const onChange = () => {
+        if (supplyPad.value > 6) {
+          supplyPad.value = 6;
+        }
+        if (heavySupplyPad.value > 9) {
+          heavySupplyPad.value = 9;
+        }
       logger(
         supplyPad.value,
         heavySupplyPad.value,
