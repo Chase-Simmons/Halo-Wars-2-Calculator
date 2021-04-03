@@ -6,58 +6,105 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div>
+      <input class="supplyPad" />
+      <input class="heavySupplyPad" />
+      <input class="generator" />
+      <input class="heavyGenerator" />
+    </div>
     <script>
       const production = {
-        energy: 0,
-        power: 0,
-        supplyPads: 3,
-        hSupplyPads: 0,
+        supply: 600,
+        power: 400,
+        supplyPads: 1,
+        hSupplyPads: 1,
         generator: 0,
         hGenerator: 0,
       };
 
       const buildings = {
         supplyPad: {
-          production: 4.75,
           buildTime: 20,
           cost: 150,
         },
         generator: {
-          production: 3,
           buildTime: 20,
           cost: 200,
         },
       };
 
       function logger(sP, hSP, g, hG) {
-        let totalSP = 0;
+        let totalS = 0;
+        let totalP = 0;
 
-        for (let i = 0; i < sP; i++) {
-          let condition = i + 1;
+        for (let i = 0; i < hSP; i++) {
+          const condition = i + 1;
           switch (condition) {
             case 1:
-              totalSP += 4.75;
+              totalS += 7.5;
               break;
             case 2:
-              totalSP += 4.28;
+              totalS += 5.75;
               break;
             case 3:
-              totalSP += 3.66;
+              totalS += 4.2;
               break;
             case 4:
-              totalSP += 3.3;
+              totalS += 3.47;
               break;
             case 5:
-              totalSP += 2.95;
+              totalS += 4.41;
               break;
             case 6:
-              totalSP += 2.47;
+              totalS += 0.7;
+              break;
+            case 7:
+              totalS += 1.67;
+              break;
+            case 8:
+              totalS += 1.3;
+              break;
+            case 9:
+              totalS += 1.95;
               break;
             default:
               break;
           }
         }
-        console.log(totalSP);
+
+        for (let i = 0; i < sP; i++) {
+          const condition = i + 1 + hSP;
+          switch (condition) {
+            case 1:
+              totalS += 4.75;
+              break;
+            case 2:
+              totalS += 4.28;
+              break;
+            case 3:
+              totalS += 3.66;
+              break;
+            case 4:
+              totalS += 3.3;
+              break;
+            case 5:
+              totalS += 2.95;
+              break;
+            case 6:
+              totalS += 2.47;
+              break;
+            default:
+              break;
+          }
+        }
+
+        for (let i = 0; i < g; i++) {
+          totalP += 3;
+        }
+        for (let i = 0; i < hG; i++) {
+          totalP += 6;
+        }
+        console.log(totalS, totalP);
       }
 
       logger(
