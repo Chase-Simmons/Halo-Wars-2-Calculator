@@ -7,10 +7,29 @@
   </head>
   <body>
     <div>
-      <input class="supplyPad" />
-      <input class="heavySupplyPad" />
-      <input class="generator" />
-      <input class="heavyGenerator" />
+      <p>
+        Supply Pads<span> <input class="input supplyPad" type="number" value="0" /></span>
+      </p>
+
+      <p>
+        Heavy Supply Pads<span></span>
+          <input class="input heavySupplyPad" type="number" value="0"
+        /></span>
+      </p>
+
+      <p>
+        Generators<span> <input class="input generator" type="number" value="0" /></span>
+      </p>
+
+      <p>
+        Heavy Generators<span>
+          <input class="input heavyGenerator" type="number" value="0"
+        /></span>
+      </p>
+    </div>
+    <div>
+      <p>Supply Per Sec : <span><input class="SPS" value="0" disabled></input></span></p>
+      <p>Power Per Sec : <span><input class="PPS" value="0" disabled></input></span></p>
     </div>
     <script>
       const production = {
@@ -18,8 +37,8 @@
         power: 400,
         supplyPads: 1,
         hSupplyPads: 1,
-        generator: 0,
-        hGenerator: 0,
+        generator: 3,
+        hGenerator: 2,
       };
 
       const buildings = {
@@ -33,7 +52,18 @@
         },
       };
 
-      function logger(sP, hSP, g, hG) {
+      const inputs = document.querySelectorAll('.input');
+
+      const supplyPad = document.querySelector('.supplyPad');
+      const heavySupplyPad = document.querySelector('.heavySupplyPad');
+      const generator = document.querySelector('.generator');
+      const heavyGenerator = document.querySelector('.heavyGenerator');
+
+      const SPS = document.querySelector('.SPS');
+      const PPS = document.querySelector('.PPS');
+
+      const logger = (sP, hSP, g, hG) =>{
+        // console.log(sP, hSP, g, hG);
         let totalS = 0;
         let totalP = 0;
 
@@ -73,7 +103,7 @@
         }
 
         for (let i = 0; i < sP; i++) {
-          const condition = i + 1 + hSP;
+          const condition = i + 1 + parseInt(hSP);
           switch (condition) {
             case 1:
               totalS += 4.75;
@@ -104,15 +134,23 @@
         for (let i = 0; i < hG; i++) {
           totalP += 6;
         }
-        console.log(totalS, totalP);
+
+        SPS.value = totalS
+        PPS.value = totalP
       }
 
+      
+
+      const onChange = () => {
       logger(
-        production.supplyPads,
-        production.hSupplyPads,
-        production.generator,
-        production.hGenerator
-      );
+        supplyPad.value,
+        heavySupplyPad.value,
+        generator.value,
+        heavyGenerator.value)
+      }
+
+      inputs.forEach((input) => input.addEventListener('change', onChange));
+      inputs.forEach((input) => input.addEventListener('keyup', onChange));
     </script>
   </body>
 </html>
