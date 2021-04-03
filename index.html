@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Halo Wars 2 Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script>
+      const production = {
+        energy: 0,
+        power: 0,
+        supplyPads: 3,
+        hSupplyPads: 0,
+        generator: 0,
+        hGenerator: 0,
+      };
+
+      const buildings = {
+        supplyPad: {
+          production: 4.75,
+          buildTime: 20,
+          cost: 150,
+        },
+        generator: {
+          production: 3,
+          buildTime: 20,
+          cost: 200,
+        },
+      };
+
+      function logger(sP, hSP, g, hG) {
+        let totalSP = 0;
+
+        for (let i = 0; i < sP; i++) {
+          let condition = i + 1;
+          switch (condition) {
+            case 1:
+              totalSP += 4.75;
+              break;
+            case 2:
+              totalSP += 4.28;
+              break;
+            case 3:
+              totalSP += 3.66;
+              break;
+            case 4:
+              totalSP += 3.3;
+              break;
+            case 5:
+              totalSP += 2.95;
+              break;
+            case 6:
+              totalSP += 2.47;
+              break;
+            default:
+              break;
+          }
+        }
+        console.log(totalSP);
+      }
+
+      logger(
+        production.supplyPads,
+        production.hSupplyPads,
+        production.generator,
+        production.hGenerator
+      );
+    </script>
+  </body>
+</html>
